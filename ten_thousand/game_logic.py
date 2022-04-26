@@ -54,10 +54,10 @@ class GameLogic:
         x = []
         for value in range(0, values):
             x.append(random.randint(1, values))
-        return(x)
+        return x
         
         
 
 
 
-GameLogic.roll_dice(3)
+
