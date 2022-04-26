@@ -54,7 +54,6 @@ class GameLogic:
         x = []
         for value in range(0, values):
             x.append(random.randint(1, values))
-        print(x)
         return(x)
         
         
