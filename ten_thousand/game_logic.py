@@ -44,21 +44,21 @@ class GameLogic:
         if int(roll.get(6) or 0) >= 3:
             sumof.append((((roll.get(6)-2)) * 600))
     
-        # print(sumof)    
         final_total = sum(sumof)
-        # print(final_total)
         return final_total
              
  
 
     @staticmethod
     def roll_dice(values):
-        pass
-        # x = random.randint(1, values)
-        # print(x)
-        # return x
+        x = []
+        for value in range(0, values):
+            x.append(random.randint(1, values))
+        print(x)
+        return(x)
+        
+        
 
 
-GameLogic.calculate_score((1, 2, 3, 4, 5, 6))
 
-# GameLogic.roll_dice(1)
+GameLogic.roll_dice(3)
