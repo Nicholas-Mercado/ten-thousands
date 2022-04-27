@@ -25,36 +25,45 @@ class Game:
         self.banker = Banker()
         
     def play(self, roller=GameLogic.roll_dice):
-        
+        # game opening************************
         print('''Welcome to Ten Thousand
 (y)es to play or (n)o to decline''')
         
         round_counter = 0
+        
         user_input = input('> ').lower()
         if user_input == 'n':
             print("OK. Maybe another time")  
             return
+        # FULL GAME ************************
         while self.banker.balance <= 10000:
+            # variables
             num_of_dice = 6
             round_counter +=1
+            
+            # START ROUNDS **************************************
             print(f'Starting round {round_counter}\nRolling 6 dice...')
             dice_roll = roller(num_of_dice)
             format_dice_roll = f'*** {self.format_rolls(dice_roll)}***'
             print(format_dice_roll)
             print("Enter dice to keep, or (q)uit:")
             user_input = input('> ').lower()
+            
+            # Quit *************************************************
             if user_input == 'q':
                 print(f'Thanks for playing. You earned {self.banker.balance} points')
                 return
-            
+            # Shelf points *****************************************
             user_input = tuple(int(x) for x in user_input)
             num_of_dice -= len(user_input)
             shelved_points = GameLogic.calculate_score(user_input)
+            ### cheater logic goes here
             self.banker.shelf(shelved_points)
+            
                                                         
             print(f'You have {shelved_points} unbanked points and {num_of_dice} dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
-            
             user_input = input('> ').lower()
+            
             if user_input == 'r':
                 dice_roll = roller(num_of_dice)
                 format_dice_roll = f'*** {self.format_rolls(dice_roll)}***'
