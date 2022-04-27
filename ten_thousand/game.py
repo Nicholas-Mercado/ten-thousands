@@ -21,7 +21,11 @@ from ten_thousand.banker import Banker
 
 class Game:
 
+    def __init__(self):
+        self.banker = Banker()
+        
     def play(self, roller=GameLogic.roll_dice):
+        
         print('''Welcome to Ten Thousand
 (y)es to play or (n)o to decline''')
         num_of_dice = 6
@@ -29,8 +33,7 @@ class Game:
         if user_input == 'n':
             print("OK. Maybe another time")
         else:
-            print('''Starting round 1
-Rolling 6 dice...''')
+            print('Starting round 1\nRolling 6 dice...')
             current_bank = 0
             current_shelf = 0
             dice_roll = roller(num_of_dice)
@@ -41,22 +44,19 @@ Rolling 6 dice...''')
             if user_input == 'q':
                 print(f'Thanks for playing. You earned 0 points')
                 return
+            
             user_input = tuple(int(x) for x in user_input)
-            print(user_input)
             shelved_points = GameLogic.calculate_score(user_input)
-            banker.shelf(shelved_points)
-            print(f'''
-            You have {shelved_points} unbanked points and 5 dice remaining
-            (r)oll again, (b)ank your points or (q)uit:
-            ''')
+            self.banker.shelf(shelved_points)
+            
+            print(f'You have {shelved_points} unbanked points and 5 dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
+            
             user_input = input('> ').lower()
             if user_input == 'b':
-                banker.bank(0, shelved_points)
-            print(f'''
-            You banked {banker.balance} points in round 1
-            Total score is {banker.balance} points
-            Starting round 2
-            ''')
+                self.banker.bank(0, shelved_points)
+                
+                
+            print(f'You banked {self.banker.balance} points in round 1\nTotal score is {self.banker.balance} points\nStarting round 2')
 
         if user_input == 'q':
             print("Thanks for playing. You earned 0 points")
