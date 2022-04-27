@@ -26,3 +26,32 @@ none
 
 Describe any tests that you did not complete, skipped, etc
 all tests passing
+
+---
+
+# LAB - Class 07
+ 
+## Project: Ten Thousand 2
+ 
+Author: Michelle Salazar and Nicolas Mercado
+ 
+## Links and Resources
+ 
+ 
+## Setup
+ 
+cat requirements.txt
+pip install pytest
+ 
+## Tests
+ 
+How do you run tests?
+ 
+pytest
+ 
+Any tests of note?
+ 
+none
+ 
+Describe any tests that you did not complete, skipped, etc
+all tests passing
