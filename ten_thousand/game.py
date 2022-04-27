@@ -49,3 +49,27 @@ Rolling 6 dice...''')
 if __name__ == '__main__':
     game = Game()
     game.play()
+
+
+# Enter dice to keep, or (q)uit:
+# Call banking function for input
+# > 5
+# call shelf got points unbanked
+# create a dice tracker
+# print
+# You have 50 unbanked points and 5 dice remaining
+# (r)oll again, (b)ank your points or (q)uit:
+# input for banking
+# > b
+# call bank
+# You banked 50 points in round 1
+# creating total score var
+# Total score is 50 points
+# create round var
+# loop
+# Starting round 2
+# Rolling 6 dice...
+# *** 6 4 5 2 3 1 ***
+# Enter dice to keep, or (q)uit:
+# > q
+# Thanks for playing. You earned 50 points
