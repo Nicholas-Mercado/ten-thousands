@@ -73,11 +73,13 @@ class Game:
                                                         
             print(f'You have {shelved_points} unbanked points and {num_of_dice} dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
             user_input = input('> ').lower().replace(' ','')
-            
+           
+        #    Rolling Again
             if user_input == 'r':
-                dice_roll = roller(num_of_dice)
-                format_dice_roll = f'*** {self.format_rolls(dice_roll)}***'
-                print(format_dice_roll)
+                self.roll_again(num_of_dice, roller)
+                
+                # You have 500 unbanked points and 2 dice remaining
+                # (r)oll again, (b)ank your points or (q)uit:
             if user_input == 'b':
                 self.banker.bank()
             if user_input == 'q':
@@ -112,6 +114,14 @@ class Game:
         # print('is_cheater called user input', user_input)    
         return all(check_list) 
       
+    def roll_again(self, num_of_dice, roller):
+        print(f"Rolling {num_of_dice} dice...")
+        dice_roll = roller(num_of_dice)
+        format_dice_roll = f'*** {self.format_rolls(dice_roll)}***'
+        print(format_dice_roll)
+        print("Enter dice to keep, or (q)uit:")
+        user_input = input('> ').lower().replace(' ','')
+                
 if __name__ == '__main__':
     game = Game()
     banker = Banker()
