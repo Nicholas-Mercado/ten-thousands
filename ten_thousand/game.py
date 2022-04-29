@@ -5,7 +5,7 @@
 # banking method
 
 
-
+import sys
 
 
 
@@ -34,7 +34,7 @@ class Game:
         user_input = input('> ').lower()
         if user_input == 'n':
             print("OK. Maybe another time")  
-            return
+            sys.exit()
         # FULL GAME ************************
         while self.banker.balance <= 10000:
             # variables
@@ -48,8 +48,8 @@ class Game:
             print(format_dice_roll)
             print("Enter dice to keep, or (q)uit:")
             user_input = input('> ').lower().replace(' ','')
-            # print(dice_roll)
-            # print(user_input)
+
+
             # Quit *************************************************
             if user_input == 'q':
                 print(f'Thanks for playing. You earned {self.banker.balance} points')
@@ -77,9 +77,7 @@ class Game:
         #    Rolling Again
             if user_input == 'r':
                 self.roll_again(num_of_dice, roller)
-                
-                # You have 500 unbanked points and 2 dice remaining
-                # (r)oll again, (b)ank your points or (q)uit:
+            
             if user_input == 'b':
                 self.banker.bank()
             if user_input == 'q':
@@ -121,7 +119,15 @@ class Game:
         print(format_dice_roll)
         print("Enter dice to keep, or (q)uit:")
         user_input = input('> ').lower().replace(' ','')
-                
+        
+    def roll():
+        pass
+       
+    def quit_game():
+        print(f'Thanks for playing. You earned {banker.balance} points')
+        return   
+    
+           
 if __name__ == '__main__':
     game = Game()
     banker = Banker()
