@@ -1,15 +1,5 @@
 
-# Application should simulate rolling between 1 and 6 dice
-# call roll_dice
-# Application should allow user to set aside dice each roll
-# banking method
-
-
-
 import sys
-
-
-
 if __name__ == '__main__':
     from game_logic import GameLogic
     from banker import Banker
@@ -52,9 +42,8 @@ class Game:
                 
         self.quit_game_check()
                 
-        self.user_input = tuple(int(x) for x in self.user_input)
+        self.dice_kepted = tuple(int(x) for x in self.user_input)
         
-        return self.user_input
     
     def roll_again_check(self):
         if self.user_input == 'r':
@@ -78,26 +67,8 @@ class Game:
         """ The game"""
         self.greet_user()
         self.roller = roller
-    #     self.start_game()
-    #     self.starting_round()
-    #     self.roll_dice()
-        
-    
-            
-    # def starting_round(self):
-    #      print(f'Starting round 1\nRolling 6 dice...')
+ 
          
-    # def roll_dice(self):
-    #     num_of_dice = 6
-    #     dice_roll = self.roller(num_of_dice)
-    #     format_dice_roll = f'*** {self.format_rolls(dice_roll)}***'
-    #     print(format_dice_roll)
-         
-         
-         
-        
-        
-    
         
         while self.banker.balance <= 10000:
             
@@ -107,39 +78,38 @@ class Game:
             print(f'Starting round {self.round_counter}\nRolling 6 dice...')
             
             self.dice_roll = roller(self.num_of_dice)
+            
             self.format_dice_roll = f'*** {self.format_rolls(self.dice_roll)}***'
             print(self.format_dice_roll)
-
-
             print("Enter dice to keep, or (q)uit:")
+            
             self.user_input = input('> ').lower().replace(' ','')
 
             
             self.quit_game_check()
            
-            self.user_input = tuple(int(x) for x in self.user_input)
+            self.dice_kepted = tuple(int(x) for x in self.user_input)
             
             while not self.is_kepted_dice_valid():
-                self.user_input = self.handle_cheater()
+                self.handle_cheater()
             
                          
                     
-            shelved_points = GameLogic.calculate_score(self.user_input)
+            self.banker.shelf(GameLogic.calculate_score(self.dice_kepted))
             
             self.num_of_dice -= len(self.user_input)
-            self.banker.shelf(shelved_points)
                                                         
-            print(f'You have {shelved_points} unbanked points and {self.num_of_dice} dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
+            print(f'You have {self.banker.shelved} unbanked points and {self.num_of_dice} dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
             self.user_input = input('> ').lower().replace(' ','')
            
-
+            
             self.roll_again_check()
-               
+            
             self.bank_check()
             
             self.quit_game_check()
             
-            print(f'You banked {shelved_points} points in round {self.round_counter}\nTotal score is {self.banker.balance} points')
+            print(f'You banked {self.banker.shelved} points in round {self.round_counter}\nTotal score is {self.banker.balance} points')
 
             
 
@@ -152,7 +122,7 @@ class Game:
     def is_kepted_dice_valid(self):
         test_dice_roll = [x for x in self.dice_roll]
         check_list = []
-        for num in self.user_input:
+        for num in self.dice_kepted:
             is_in_list = False
             for position in test_dice_roll:
                 if num == position:
