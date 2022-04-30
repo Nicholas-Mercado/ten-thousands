@@ -19,6 +19,7 @@ class Game:
         self.num_of_dice = 6
         self.user_input = ''
         self.dice_roll = 0
+        
     def greet_user(self):
         """ Start game msg"""
         print('Welcome to Ten Thousand')
@@ -61,58 +62,11 @@ class Game:
     def bank_check(self):
                 
                 if self.user_input == 'b':
+                    print(f'You banked {self.banker.shelved} points in round {self.round_counter}')
                     self.banker.bank()
-                
-    def play(self, roller=GameLogic.roll_dice):
-        """ The game"""
-        self.greet_user()
-        self.roller = roller
- 
-         
-        
-        while self.banker.balance <= 10000:
-            
-            self.round_counter +=1
-            
-
-            print(f'Starting round {self.round_counter}\nRolling 6 dice...')
-            
-            self.dice_roll = roller(self.num_of_dice)
-            
-            self.format_dice_roll = f'*** {self.format_rolls(self.dice_roll)}***'
-            print(self.format_dice_roll)
-            print("Enter dice to keep, or (q)uit:")
-            
-            self.user_input = input('> ').lower().replace(' ','')
-
-            
-            self.quit_game_check()
-           
-            self.dice_kepted = tuple(int(x) for x in self.user_input)
-            
-            while not self.is_kepted_dice_valid():
-                self.handle_cheater()
-            
-                         
+                    print(f'Total score is {self.banker.balance} points')
                     
-            self.banker.shelf(GameLogic.calculate_score(self.dice_kepted))
-            
-            self.num_of_dice -= len(self.user_input)
-                                                        
-            print(f'You have {self.banker.shelved} unbanked points and {self.num_of_dice} dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
-            self.user_input = input('> ').lower().replace(' ','')
-           
-            
-            self.roll_again_check()
-            
-            self.bank_check()
-            
-            self.quit_game_check()
-            
-            print(f'You banked {self.banker.shelved} points in round {self.round_counter}\nTotal score is {self.banker.balance} points')
-
-            
-
+                
     def format_rolls(self, dice_roll):
         string = ''
         for number in dice_roll:
@@ -132,7 +86,52 @@ class Game:
                     test_dice_roll[index] = 0
                     break
             check_list.append(is_in_list)
-        return all(check_list) 
+        return all(check_list)
+            
+    def play(self, roller=GameLogic.roll_dice):
+        """ The game"""
+        self.greet_user()
+        self.roller = roller
+ 
+         
+        
+        while self.banker.balance <= 10000:
+            self.round_counter +=1
+            self.num_of_dice = 6
+            
+            print(f'Starting round {self.round_counter}\nRolling 6 dice...')
+            self.dice_roll = roller(self.num_of_dice)
+            self.format_dice_roll = f'*** {self.format_rolls(self.dice_roll)}***'
+            print(self.format_dice_roll)
+            print("Enter dice to keep, or (q)uit:")
+            
+            self.user_input = input('> ').lower().replace(' ','')
+
+            self.quit_game_check()
+           
+            self.dice_kepted = tuple(int(x) for x in self.user_input)
+            
+            while not self.is_kepted_dice_valid():
+                self.handle_cheater()
+            
+                           
+            self.banker.shelf(GameLogic.calculate_score(self.dice_kepted))
+            
+            self.num_of_dice -= len(self.user_input)
+                                                        
+            print(f'You have {self.banker.shelved} unbanked points and {self.num_of_dice} dice remaining\n(r)oll again, (b)ank your points or (q)uit:')
+            self.user_input = input('> ').lower().replace(' ','')
+           
+            
+            self.roll_again_check()
+            self.bank_check()
+            self.quit_game_check()
+            
+            
+
+            
+
+    
       
     
 if __name__ == '__main__':
