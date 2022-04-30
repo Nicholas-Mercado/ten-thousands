@@ -1,1 +1,6 @@
 .venv
+ten_thousand/__pycache__
+tests/version_1/__pycache__
+tests/version_2/__pycache__
+tests/version_3/__pycache__
+.gitignore
