@@ -136,9 +136,22 @@ class NervousNellie(BaseBot):
         return "b"
 
 
-class Our_Bot(BaseBot):
+class Rick_Diggins(BaseBot):
     def _roll_bank_or_quit(self):
-        if self.dice_remaining > 2 :
+        if self.dice_remaining > 2 and self.unbanked_points < 1000 :
+            return "r"
+        else:
+            return "b"
+
+    def _enter_dice(self):
+        """simulate user entering which dice to keep.
+        Defaults to all scoring dice"""
+
+        return super()._enter_dice()
+    
+class Berry_six(BaseBot):
+    def _roll_bank_or_quit(self):
+        if self.unbanked_points < 800 :
             return "r"
         else:
             return "b"
