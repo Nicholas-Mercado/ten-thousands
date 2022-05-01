@@ -84,3 +84,5 @@ none
  
 Describe any tests that you did not complete, skipped, etc
 1-2 tests passing, refactoring code for better flow 
+
+Did not complete zilch, hot dice, or keepers.
