@@ -84,3 +84,23 @@ none
  
 Describe any tests that you did not complete, skipped, etc
 1-2 tests passing, refactoring code for better flow 
+
+
+# LAB - Class 09
+ 
+## Project: Ten Thousand 4
+ 
+Author: Michelle Salazar and Nicolas Mercado
+ 
+## Links and Resources
+ 
+ 
+## Setup
+ 
+cat requirements.txt
+pip install pytest
+run bot.py file
+ 
+## Tests
+ 
+No tests
